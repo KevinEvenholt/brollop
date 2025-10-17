@@ -3,6 +3,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --accent: #5f6d4e; /* soft green */
+  --little-darker-green: #2b3323;
 }
 
 @theme inline {
@@ -10,17 +12,32 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-cormorant: var(--font-cormorant);
+  --font-baskerville: var(--font-baskerville);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Dark mode removed */
 
 body {
-  background: var(--background);
+  /* Soft linen-like background */
+  background-color: #faf8f5;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'><rect width='40' height='40' fill='%23faf8f5'/><path d='M0 0 L40 40' stroke='%23000000' stroke-opacity='.02' stroke-width='1'/><path d='M40 0 L0 40' stroke='%23000000' stroke-opacity='.02' stroke-width='1'/><path d='M0 20 L40 20' stroke='%23000000' stroke-opacity='.015' stroke-width='1'/><path d='M20 0 L20 40' stroke='%23000000' stroke-opacity='.015' stroke-width='1'/></svg>");
+  background-repeat: repeat;
+  background-size: auto;
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-cormorant), Georgia, "Times New Roman", Times, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Simple wedding theme accents */
+.input {
+  @apply border border-black/10 rounded-md px-3 py-2 bg-white/90 backdrop-blur text-[color:var(--foreground)] shadow-[inset_0_1px_0_rgba(255,255,255,0.15)] focus:outline-none focus:ring-2 focus:ring-black/10;
+}
+
+h1, h2, h3, h4, h5, h6, a {
+  font-family: var(--font-baskerville), Georgia, "Times New Roman", Times, serif;
+  color: var(--accent);
 }
