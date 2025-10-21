@@ -20,6 +20,8 @@ interface Gift {
 export default function GiftReservation() {
   const [gifts, setGifts] = useState<Gift[]>([]);
   const [showAllGifts, setShowAllGifts] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [giftToReserve, setGiftToReserve] = useState<Gift | null>(null);
 
   // Initialize gifts data
   useEffect(() => {
@@ -128,7 +130,7 @@ export default function GiftReservation() {
     return () => unsubscribe();
   }, []);
 
-  const handleReserveGift = async (giftId: string) => {
+  const handleReserveGift = (giftId: string) => {
     if (gifts.find((g) => g.id === giftId)?.isSpecial) {
       return; // Don't allow reservation of special gifts
     }
@@ -136,15 +138,30 @@ export default function GiftReservation() {
     const gift = gifts.find((g) => g.id === giftId);
     if (!gift) return;
 
+    setGiftToReserve(gift);
+    setShowConfirmDialog(true);
+  };
+
+  const confirmReservation = async () => {
+    if (!giftToReserve) return;
+
     try {
       // Update reservation in Firebase
-      await setDoc(doc(db, "reservations", giftId), {
-        reserved: !gift.reserved,
+      await setDoc(doc(db, "reservations", giftToReserve.id), {
+        reserved: !giftToReserve.reserved,
         timestamp: new Date().toISOString(),
       });
     } catch (error) {
       console.error("Error updating reservation:", error);
     }
+
+    setShowConfirmDialog(false);
+    setGiftToReserve(null);
+  };
+
+  const cancelReservation = () => {
+    setShowConfirmDialog(false);
+    setGiftToReserve(null);
   };
 
   const visibleGifts = showAllGifts ? gifts : gifts.slice(0, 2);
@@ -156,7 +173,7 @@ export default function GiftReservation() {
         {visibleGifts.map((gift) => (
           <div
             key={gift.id}
-            className={`bg-white/85 border-2 rounded-lg overflow-hidden shadow-sm transition-all ${
+            className={`bg-white/85 border-2 rounded-lg overflow-hidden shadow-sm transition-all flex flex-col ${
               gift.reserved
                 ? "border-gray-400 bg-gray-200/70 opacity-75 cursor-not-allowed"
                 : gift.isSpecial
@@ -175,7 +192,7 @@ export default function GiftReservation() {
               </div>
             )}
 
-            <div className="p-6">
+            <div className="p-6 flex-1 flex flex-col">
               <h3
                 className="text-lg font-semibold mb-2"
                 style={{ color: "var(--accent)" }}
@@ -205,7 +222,7 @@ export default function GiftReservation() {
                 </p>
               )}
 
-              <div className="mt-4">
+              <div className="mt-auto">
                 {gift.isSpecial && gift.id === "cancerfonden" ? (
                   <div className="text-center">
                     <span className="inline-block px-3 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
@@ -279,6 +296,58 @@ export default function GiftReservation() {
               ? "Visa färre"
               : `Visa alla gåvor (${gifts.length - 2} till)`}
           </button>
+        </div>
+      )}
+
+      {/* Custom Confirmation Dialog */}
+      {showConfirmDialog && giftToReserve && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div className="text-center">
+              <div className="mb-4">
+                <div className="w-16 h-16 mx-auto bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                  <svg
+                    className="w-8 h-8 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-semibold mb-2">
+                  {giftToReserve.reserved
+                    ? "Avreservera gåva"
+                    : "Reservera gåva"}
+                </h3>
+                <p className="text-gray-600 mb-6">
+                  {giftToReserve.reserved
+                    ? `Är du säker på att du vill avreservera "${giftToReserve.name}"?`
+                    : `Är du säker på att du vill reservera "${giftToReserve.name}"?`}
+                </p>
+              </div>
+              <div className="flex gap-3 justify-center">
+                <button
+                  onClick={cancelReservation}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+                >
+                  Avbryt
+                </button>
+                <button
+                  onClick={confirmReservation}
+                  className="px-4 py-2 text-sm font-medium text-white rounded-lg transition-colors"
+                  style={{ backgroundColor: "var(--accent)" }}
+                >
+                  {giftToReserve.reserved ? "Avreservera" : "Reservera"}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
