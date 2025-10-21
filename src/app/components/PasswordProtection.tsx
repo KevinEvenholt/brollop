@@ -130,7 +130,7 @@ export default function PasswordProtection({
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2 text-center">
-              Ange bröllopsdatumet (DD/MM)
+              Ange bröllopsdatumet (DD/MM) för att komma vidare
             </label>
             <div className="flex items-center justify-center gap-2">
               <input

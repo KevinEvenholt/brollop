@@ -169,7 +169,7 @@ export default function OsaForm() {
                     className="w-4 h-4 cursor-pointer"
                   />
                   <label className="flex-1 cursor-pointer text-base">
-                    Kommer gladeligen
+                    Ja, vi kommer gladeligen
                   </label>
                 </div>
                 <div
@@ -183,7 +183,7 @@ export default function OsaForm() {
                     className="w-4 h-4 cursor-pointer"
                   />
                   <label className="flex-1 cursor-pointer text-base">
-                    Kan tyvärr inte
+                    Tyvärr kan vi inte komma
                   </label>
                 </div>
               </div>

@@ -44,7 +44,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="mx-auto max-w-5xl px-4 py-10 space-y-35">
+      <main className="mx-auto max-w-5xl px-4 py-10 space-y-35 overflow-x-hidden">
         <div className="hidden lg:block absolute top-140 -left-28 w-80 h-180 rotate-5">
           <Image src="/tree.png" alt="Tree" fill className="object-fill" />
         </div>

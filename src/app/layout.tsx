@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="sv">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${baskerville.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${cormorant.variable} ${baskerville.variable} antialiased overflow-x-hidden`}
       >
         {children}
       </body>

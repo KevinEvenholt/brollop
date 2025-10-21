@@ -33,18 +33,40 @@ export default function GiftReservation() {
         isSpecial: true,
       },
       {
-        id: "cervera",
-        name: "Presentkort på Cervera",
+        id: "presentkort",
+        name: "Presentkort",
         description:
-          "Presentkort på Cervera för att fylla vårt hem med vackra saker.",
+          "Presentkort på Cervera, Ikea, Kitchentime, etc. för att fylla vårt hem med vackra saker.",
         reserved: false,
         isSpecial: true,
       },
       {
-        id: "bed-linen",
-        name: "Sängkläder",
-        description: "Mjuka och vackra sängkläder i bomull",
-        price: "899 kr",
+        id: "le-creuset-bestick-och-redskapsforvaring",
+        name: "Le Creuset bestick- och redskapsförvaring",
+        description: "Le Creuset bestick- och redskapsförvaring 1,1 l",
+        price: "499 kr",
+        link: "https://www.kitchentime.se/varumarken/le-creuset/le-creuset-bestick--och-redskapsforvaring-11-l/?variantId=40245-04",
+        image: "/skål.avif",
+        reserved: false,
+        isSpecial: false,
+      },
+      {
+        id: "le-creuset-heritage-ugnsform-32-cm",
+        name: "Le Creuset Heritage ugnsform",
+        description: "Le Creuset Heritage ugnsform 32 cm",
+        price: "639 kr",
+        link: "https://www.kitchentime.se/varumarken/le-creuset/le-creuset-heritage-ugnsform-37-cm/?variantId=37122-02",
+        image: "/sform.avif",
+        reserved: false,
+        isSpecial: false,
+      },
+      {
+        id: "le-creuset-heritage-ugnsform-26-cm",
+        name: "Le Creuset Heritage ugnsform",
+        description: "Le Creuset Heritage ugnsform 26 cm",
+        price: "535 kr",
+        link: "https://www.kitchentime.se/varumarken/le-creuset/le-creuset-heritage-ugnsform-31-cm/?variantId=37121-01",
+        image: "/sform.avif",
         reserved: false,
         isSpecial: false,
       },
@@ -62,10 +84,10 @@ export default function GiftReservation() {
         id: "satake-ame-knivset",
         name: "Satake Ame Knivset",
         description:
-          "Satake Ame Knivset är en perfekt gåva för den som har allt.",
+          "Satake Ame knivset från Satake är ett elegant och välbalanserat set där tradition möter precision.",
         price: "2,941 kr",
         image: "/kniv.avif",
-        link: "https://royaldesign.se/ame-knivset-petty-santoku-kiritsuke-3-delar",
+        link: "https://www.kitchentime.se/varumarken/satake/satake-ame-knivset/?variantId=46221-01&country=SE&utm_source=google&utm_medium=cpc&utm_campaign=%5BShopping%5D%20-%20High%20price%20rank&utm_id=21845745784&gad_source=1&gad_campaignid=21845745784&gclid=CjwKCAjw3tzHBhBREiwAlMJoUgdhAa0eQRYPLZUYOPLwK3hR3jqbnnhOgik0nn85D8GDZwqhSkovlBoCkacQAvD_BwE",
         reserved: false,
         isSpecial: false,
       },
@@ -136,7 +158,7 @@ export default function GiftReservation() {
             key={gift.id}
             className={`bg-white/85 border-2 rounded-lg overflow-hidden shadow-sm transition-all ${
               gift.reserved
-                ? "border-gray-300 bg-gray-100/50 opacity-60"
+                ? "border-gray-400 bg-gray-200/70 opacity-75 cursor-not-allowed"
                 : gift.isSpecial
                 ? "border-blue-200 bg-blue-50/50"
                 : "border-black/10 hover:border-accent"
@@ -148,7 +170,7 @@ export default function GiftReservation() {
                   src={gift.image as string}
                   alt={gift.name}
                   fill
-                  className="object-cover"
+                  className="object-contain scale-90"
                 />
               </div>
             )}
@@ -192,11 +214,11 @@ export default function GiftReservation() {
                   </div>
                 ) : gift.reserved ? (
                   <div className="text-center">
-                    <span className="inline-block px-3 py-1 text-xs font-medium bg-gray-200 text-gray-600 rounded-full">
+                    <span className="inline-block px-3 py-1 text-xs font-medium bg-gray-300 text-gray-700 rounded-full">
                       Reserverad
                     </span>
                   </div>
-                ) : gift.id === "cervera" ? (
+                ) : gift.id === "presentkort" ? (
                   <div></div>
                 ) : (
                   <button
@@ -212,6 +234,40 @@ export default function GiftReservation() {
         ))}
       </div>
 
+      {/* Mer kommer snart card - only shown when all gifts are visible */}
+      {showAllGifts && (
+        <div className="max-w-4xl mx-auto mt-8">
+          <div className="flex justify-center">
+            <div className="bg-white/85 border-2 border-dashed border-gray-300 rounded-lg overflow-hidden shadow-sm w-full max-w-sm">
+              <div className="p-6 text-center">
+                <div className="mb-4">
+                  <div className="w-16 h-16 mx-auto bg-gray-100 rounded-full flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8 text-gray-400"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold mb-2 text-gray-600">
+                  Mer kommer snart
+                </h3>
+                <p className="text-sm text-gray-500">
+                  Vi lägger till fler gåvor efter hand
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Show More Button */}
       {hasMoreGifts && (
         <div className="text-center mt-8">
