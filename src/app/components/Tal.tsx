@@ -5,7 +5,6 @@ import { useState } from "react";
 export default function Tal() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [speechType, setSpeechType] = useState("");
   const [timeframe, setTimeframe] = useState("");
   const [details, setDetails] = useState("");
   const [sent, setSent] = useState(false);
@@ -14,7 +13,6 @@ export default function Tal() {
     return (
       name.trim() &&
       email.trim() &&
-      speechType.trim() &&
       timeframe.trim() &&
       details.trim()
     );
@@ -23,7 +21,6 @@ export default function Tal() {
   const showIntro =
     !name.trim() &&
     !email.trim() &&
-    !speechType.trim() &&
     !timeframe.trim() &&
     !details.trim();
 
@@ -32,7 +29,7 @@ export default function Tal() {
     const res = await fetch("/api/speach", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, speechType, timeframe, details }),
+      body: JSON.stringify({ name, email, timeframe, details }),
     });
     if (res.ok) setSent(true);
   };

@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
     const data = await req.json();
-    const { name, email, speechType, timeframe, details } = data;
+    const { name, email, timeframe, details } = data;
 
     const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -19,7 +19,6 @@ export async function POST(req: Request) {
             <h2 style="text-align:center;color:#a7794a;">💍 Ny talanmälan</h2>
             <p><b>Namn:</b> ${name}</p>
             <p><b>E-post:</b> ${email}</p>
-            <p><b>Typ av tal:</b> ${speechType}</p>
             <p><b>Tidsram:</b> ${timeframe}</p>
             <p><b>Relevant information:</b> ${details}</p>
         </div>
