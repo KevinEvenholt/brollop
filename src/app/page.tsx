@@ -9,6 +9,7 @@ import OSAForm from "./components/OSAForm";
 import Countdown from "./components/Countdown";
 import PasswordProtection from "./components/PasswordProtection";
 import GiftReservation from "./components/GiftReservation";
+import Tal from "./components/Tal";
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -39,6 +40,9 @@ export default function Home() {
             </li>
             <li>
               <a href="#osa">OSA</a>
+            </li>
+            <li>
+              <a href="#tal">Tal</a>
             </li>
           </ul>
         </nav>
@@ -197,6 +201,12 @@ export default function Home() {
         <Section id="osa" title="OSA">
           <div className="bg-white/85 border border-black/10 rounded-lg p-4 sm:p-2 shadow-sm text-center">
             <OSAForm />
+          </div>
+        </Section>
+
+        <Section id="tal" title="Tal">
+          <div className="bg-white/85 border border-black/10 rounded-lg p-8 sm:p-10 shadow-sm">
+            <Tal />
           </div>
         </Section>
       </main>
