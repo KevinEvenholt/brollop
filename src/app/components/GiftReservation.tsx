@@ -193,6 +193,36 @@ export default function GiftReservation() {
         reserved: false,
         isSpecial: false,
       },
+      {
+        id: "zack-percale-paslakanset-dubbelsang-ekologisk",
+        name: "Zack percale påslakanset",
+        description: "Zack percale paslakanset 220x210 cm",
+        price: "599 kr",
+        image: "/sängkläder.webp",
+        link: "https://www.jotex.se/zack/zack-percale-paslakanset-dubbelsang-ekologisk/1731612-08",
+        reserved: false,
+        isSpecial: false,
+      },
+      {
+        id: "legnoart-amarone-vinoppnare",
+        name: "Legnoart Amarone vinoppnare",
+        description: "Legnoart Amarone vinoppnare",
+        price: "299 kr",
+        image: "/vin.avif",
+        link: "https://www.bagarenochkocken.se/p/legnoart-amarone-vinoppnare_64336/?shopping_id_click=1067-21618-64336&gad_source=1&gad_campaignid=9410210605&gbraid=0AAAAAD_AzLvcNeJgkSk8_XanY7TM8zg8N",
+        reserved: false,
+        isSpecial: false,
+      },
+      {
+        id: "satake-kuro-chopper",
+        name: "Satake Kuro Chopper",
+        description: "Satake Kuro Chopper",
+        price: "880 kr",
+        image: "/chopper.webp",
+        link: "https://www.kitchentime.se/varumarken/satake/satake-kuro-chopper/?variantId=33932-01",
+        reserved: false,
+        isSpecial: false,
+      },
     ];
 
     // Set initial gifts
